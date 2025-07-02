@@ -1,20 +1,15 @@
 package linked_list;
 
-import java.util.*;
+import java.util.NoSuchElementException;
 
-public class MyLinkedList<E> implements List<E> {
-    private class Node {
-        private E element;
-        private Node next;
-        private Node prev;
-    }
+public class MyLinkedList<E> implements MyListInterface<E> {
 
     private int size;
-    private Node head;
-    private Node tail;
+    private Node<E> head;
+    private Node<E> tail;
 
-    private Node getNode(int index) throws IndexOutOfBoundsException {
-        Node temp = head;
+    private Node<E> getNode(int index) throws IndexOutOfBoundsException {
+        Node<E> temp = head;
         for (int i = 0; i < index; i++) {
             temp = temp.next;
         }
@@ -33,8 +28,8 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public void addFirst(E e) {
-        Node temp = head;
-        Node newNode = new Node();
+        Node<E> temp = head;
+        Node<E> newNode = new Node<>();
         head = newNode;
         if (tail == null) {
             tail = newNode;
@@ -49,8 +44,8 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public void addLast(E e) {
-        Node temp = tail;
-        Node newNode = new Node();
+        Node<E> temp = tail;
+        Node<E> newNode = new Node<>();
         tail = newNode;
         if (head == null) {
             head = newNode;
@@ -76,10 +71,10 @@ public class MyLinkedList<E> implements List<E> {
         } else {
             this.size++;
 
-            Node indexedNode = getNode(index);
-            Node prev = indexedNode.prev;
+            Node<E> indexedNode = getNode(index);
+            Node<E> prev = indexedNode.prev;
 
-            Node newNode = new Node();
+            Node<E> newNode = new Node<>();
             newNode.element = element;
             newNode.next = indexedNode;
             indexedNode.prev = newNode;
@@ -94,7 +89,7 @@ public class MyLinkedList<E> implements List<E> {
             throw new IndexOutOfBoundsException();
         }
 
-        Node indexedNode = getNode(index);
+        Node<E> indexedNode = getNode(index);
         return indexedNode.element;
     }
 
@@ -120,9 +115,9 @@ public class MyLinkedList<E> implements List<E> {
             throw new IndexOutOfBoundsException();
         }
 
-        Node indexedNode = getNode(index);
-        Node next = indexedNode.next;
-        Node prev = indexedNode.prev;
+        Node<E> indexedNode = getNode(index);
+        Node<E> next = indexedNode.next;
+        Node<E> prev = indexedNode.prev;
 
         if (next != null) {
             next.prev = prev;
@@ -150,93 +145,9 @@ public class MyLinkedList<E> implements List<E> {
         return remove(size - 1);
     }
 
-    @Override
-    public boolean contains(Object o) {
-        return false;
-    }
-
-    @Override
-    public Iterator<E> iterator() {
-        return null;
-    }
-
-    @Override
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-        return null;
-    }
-
-    @Override
-    public boolean add(E e) {
-        return false;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public void clear() {
-
-    }
-
-    @Override
-    public E set(int index, E element) {
-        return null;
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        return 0;
-    }
-
-    @Override
-    public int lastIndexOf(Object o) {
-        return 0;
-    }
-
-    @Override
-    public ListIterator<E> listIterator() {
-        return null;
-    }
-
-    @Override
-    public ListIterator<E> listIterator(int index) {
-        return null;
-    }
-
-    @Override
-    public List<E> subList(int fromIndex, int toIndex) {
-        return List.of();
+    private static class Node<E> {
+        private E element;
+        private Node<E> next;
+        private Node<E> prev;
     }
 }

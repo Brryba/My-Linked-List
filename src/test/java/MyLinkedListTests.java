@@ -1,16 +1,15 @@
 import linked_list.MyLinkedList;
+import linked_list.MyListInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MyLinkedListTests {
-    private List<Integer> list;
+    private MyListInterface<Integer> list;
 
-    // [0, 1, 2, 3, 4]
     @BeforeEach
     void setUp() {
         list = new MyLinkedList<>();
